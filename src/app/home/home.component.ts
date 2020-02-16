@@ -17,14 +17,18 @@ export class HomeComponent implements OnInit {
   result: IValidation[];
 
   constructor(private fb: FormBuilder, protected potionService: PotionService) {
-    /*
-      FORM BUILDER FOR VALIDATOS
-    */
 
+    /* 
+    * Create dynamic object for validations of fields
+    */
     let colors = LIST_POTIONS.reduce((acc, cur, i) => {
       acc[cur.color] = ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]];
       return acc;
     }, {});
+
+    /*
+      FORM BUILDER FOR VALIDATOS
+    */
 
     this.potionListForm = this.fb.group(
       colors
@@ -38,6 +42,7 @@ export class HomeComponent implements OnInit {
   get LIST_POTIONS() {
     return LIST_POTIONS
   }
+  
   /*
     IF THE USER SUBMIT THE FORM
   */
