@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
       acc[cur.color] = ['', Validators.required];
       return acc;
     }, {});
-    
+
     this.potionListForm = this.fb.group({
       ...colors
     });
@@ -34,14 +34,6 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log(
-
-      ...LIST_POTIONS.map(item => {
-        return {
-          [item.color]: ['', Validators.required]
-        }
-      })
-    )
   }
 
   get LIST_POTIONS() {
