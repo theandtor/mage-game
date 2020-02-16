@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { PotionService } from 'src/services/potion/potion.service';
 import { LIST_POTIONS } from 'src/environments/global-constants';
+import { Potion, IPotion } from 'src/model/potion';
+import { IValidation } from 'src/model/validation';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   potionListForm: FormGroup;
 
-  error : boolean; // variable changes if there are an error
+  result: IValidation[];
 
   constructor(private fb: FormBuilder, protected potionService: PotionService) {
     /*
@@ -20,16 +22,13 @@ export class HomeComponent implements OnInit {
     */
 
     let colors = LIST_POTIONS.reduce((acc, cur, i) => {
-      acc[cur.color] = ['', Validators.required];
+      acc[cur.color] = ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]];
       return acc;
     }, {});
 
-    this.potionListForm = this.fb.group({
-      ...colors
-    });
-
-    // default when the app starts
-    this.error = null;
+    this.potionListForm = this.fb.group(
+      colors
+    );
   }
 
 
@@ -43,6 +42,15 @@ export class HomeComponent implements OnInit {
     IF THE USER SUBMIT THE FORM
   */
   onSubmit(formValueObject) {
-    this.error = this.potionListForm.getPermission(formValueObject);
+    this.result = null;
+    const result: IPotion[] = this.convertObjectToArray(formValueObject)
+    this.result = this.potionService.calculateBestAttack(result);
+    console.log(result);
+  }
+
+  convertObjectToArray(object): IPotion[] {
+    return Object.keys(object).map((key) => {
+      return new Potion(key, object[key]);
+    });
   }
 }

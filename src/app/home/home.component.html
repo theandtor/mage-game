@@ -11,9 +11,9 @@
             <!-- List Potions -->
             <div *ngFor="let potion of LIST_POTIONS" class=" form-group">
                 <label for="inputPotion{{potion.color}}">Potion {{potion.color}}</label>
-                <input type="license-plate" class="form-control" formControlName="{{potion.color}}" name="inputPotion{{potion.color}}"
-                    [pattern]="PATTERN_LICENSE_PLATE" id="inputPotion{{potion.color}}" 
-                    placeholder="Enter license plate" required>
+                <input type="number" class="form-control text-center" formControlName="{{potion.color}}" name="inputPotion{{potion.color}}"
+                    id="inputPotion{{potion.color}}" 
+                    placeholder="Enter number of potions" required>
                 <small id="{{potion.color}}Required" class="form-text text-danger"
                     *ngIf="potionListForm.get(potion.color).hasError('required') && (potionListForm.get(potion.color).dirty || potionListForm.get(potion.color).touched)">
                     Required field
@@ -30,10 +30,7 @@
     </div>
 
     <!-- CARD FOOTER WITH ANSWER -->
-    <div class="card-footer text-muted" *ngIf="error === true">
-        <h1>IT'S NOT AUTHORIZED</h1>
-    </div>
-    <div class="card-footer text-muted" *ngIf="error === false">
-        <h1>IT'S AUTHORIZED</h1>
-    </div>
+
+    <app-show-answer [result]="result"></app-show-answer>
+
 </div>
