@@ -8,13 +8,15 @@ import { HomeComponent } from './home/home.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule  } from '@angular/forms'
+import { ReactiveFormsModule  } from '@angular/forms';
+import { ImageAngularComponent } from './image-angular/image-angular.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     PotionListComponent,
-    HomeComponent
+    HomeComponent,
+    ImageAngularComponent
   ],
   imports: [
     BrowserModule,
