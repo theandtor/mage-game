@@ -1,0 +1,36 @@
+<div class="card card-width text-center">
+
+    <!-- ============== ANGULAR IMAGE ================== -->
+    <div class="card-header">
+        <app-image-angular></app-image-angular>
+    </div>
+
+    <!-- ================== FORM ================== -->
+    <div class="card-body">
+        <form [formGroup]="potionListForm" (ngSubmit)="onSubmit(potionListForm.value)">
+            <!-- List Potions -->
+            <div *ngFor="let potion of LIST_POTIONS" class=" form-group">
+                <label for="inputPotion{{potion.color}}">Potion {{potion.color}}</label>
+                <input type="number" class="form-control text-center" formControlName="{{potion.color}}" name="inputPotion{{potion.color}}"
+                    id="inputPotion{{potion.color}}" 
+                    placeholder="Enter number of potions" required>
+                <small id="{{potion.color}}Required" class="form-text text-danger"
+                    *ngIf="potionListForm.get(potion.color).hasError('required') && (potionListForm.get(potion.color).dirty || potionListForm.get(potion.color).touched)">
+                    Required field
+                </small>
+                <small id="{{potion.color}}Required" class="form-text text-danger"
+                    *ngIf="potionListForm.get(potion.color).hasError('pattern') && (potionListForm.get(potion.color).dirty || potionListForm.get(potion.color).touched)">
+                    Invalid field (Only nhumbers)
+                </small>
+            </div>
+            <!-- SUBMIT BUTTON -->
+            <button type="submit" [disabled]="potionListForm.status.toUpperCase() === 'INVALID'"
+                class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <!-- CARD FOOTER WITH ANSWER -->
+
+    <app-show-answer [result]="result"></app-show-answer>
+
+</div>
