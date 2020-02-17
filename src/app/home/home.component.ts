@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
   get LIST_POTIONS() {
     return LIST_POTIONS
   }
-  
+
   /*
     IF THE USER SUBMIT THE FORM
   */
@@ -50,7 +50,6 @@ export class HomeComponent implements OnInit {
     this.result = null;
     const result: IPotion[] = this.convertObjectToArray(formValueObject)
     this.result = this.potionService.calculateBestAttack(result);
-    console.log(result);
   }
 
   convertObjectToArray(object): IPotion[] {

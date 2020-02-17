@@ -14,4 +14,12 @@ export class ShowAnswerComponent implements OnInit {
   ngOnInit() {
   }
 
+  totalDamage(): number {
+    let sum = 0;
+    this.result.forEach(val => {
+      sum += val.percentage;
+    });
+    return sum;
+  }
+
 }

@@ -1,4 +1,5 @@
 <div class="card-footer text-white" *ngIf="result">
     <h5 class="card-header bg-danger">Answer:</h5>
     <h6 class="card-body bg-info" *ngFor="let item of result; let i = index;">Attack {{i+1}}: using {{item.quantityPotions}} different potions cause {{item.percentage}}% damage.</h6>
+    <h5 class="card-header bg-danger">Total: the sorcerer has caused {{totalDamage()}}% damage.</h5>
 </div>
